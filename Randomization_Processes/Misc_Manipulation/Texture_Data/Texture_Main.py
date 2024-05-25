@@ -25,7 +25,7 @@ class Texture_Class():
         self._file_dir = file_dir
         self._address = address
         self._seed_val = seed_val
-        with open(f"{self._file_dir}Randomized_ROM\\{self._address}-Decompressed.bin", "r+b") as decomp_file:
+        with open(f"{self._file_dir}Randomized_ROM/{self._address}-Decompressed.bin", "r+b") as decomp_file:
 #         with open(f"{self._file_dir}{self._address}-Decompressed.bin", "r+b") as decomp_file:
             self.mm = mmap(decomp_file.fileno(), 0)
     
@@ -48,7 +48,7 @@ class Texture_Class():
                 "X_Length": self.mm[text_header_index + 8],
                 "Y_Length": self.mm[text_header_index + 9],
                 })
-            with open(f"{self._file_dir}Randomized_ROM\\{self._address}-Texture_{leading_zeros(str(texture_count), 3)}.bin", "w+b") as texture_file:
+            with open(f"{self._file_dir}Randomized_ROM/{self._address}-Texture_{leading_zeros(str(texture_count), 3)}.bin", "w+b") as texture_file:
                 for index in range(self._texture_list[-1]["Texture_Start"], self._texture_list[-1]["Texture_Start"] + (self._texture_list[-1]["X_Length"] * self._texture_list[-1]["Y_Length"])//2 + 0x20):
                     texture_file.write(bytes.fromhex(leading_zeros(self.mm[index], 2)))
             texture_count += 1

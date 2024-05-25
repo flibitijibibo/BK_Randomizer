@@ -172,13 +172,13 @@ class Compressor():
     
     def _insert_into_rom_by_pointer(self, setup_pointer_start, setup_pointer_end, additional_skip_these_pointer_list=[]):
         for index_dec in range(setup_pointer_start, setup_pointer_end + 1, 8):
-            with open(f"{self._file_dir}Randomized_ROM\\Banjo-Kazooie_Randomized_Seed_{self._seed_val}.z64", "r+b") as bk_rom:
+            with open(f"{self._file_dir}Randomized_ROM/Banjo-Kazooie_Randomized_Seed_{self._seed_val}.z64", "r+b") as bk_rom:
                 mm_bk_rom = mmap(bk_rom.fileno(), 0)
                 index_hex_str = str(hex(index_dec))[2:]
                 if(index_hex_str in additional_skip_these_pointer_list):
                     self.skip_this_setup(mm_bk_rom, index_dec)
                 else:
-                    with open(f"{self._file_dir}Randomized_ROM\\{index_hex_str}-Randomized_Compressed.bin", "r+b") as setup_bin:
+                    with open(f"{self._file_dir}Randomized_ROM/{index_hex_str}-Randomized_Compressed.bin", "r+b") as setup_bin:
                         setup_content = setup_bin.read()
                         # Find The Pointer Start
                         pointer_start = ""
@@ -203,7 +203,7 @@ class Compressor():
         for offset in range(4):
             pointer_start += leading_zeros(mm_bk_rom[setup_pointer_end + 8 + offset], 2)
         address_next_start = int(f"0x{pointer_start}", 16) + int("0x10CD0", 16)
-        with open(f"{self._file_dir}Randomized_ROM\\Banjo-Kazooie_Randomized_Seed_{self._seed_val}.z64", "r+b") as bk_rom:
+        with open(f"{self._file_dir}Randomized_ROM/Banjo-Kazooie_Randomized_Seed_{self._seed_val}.z64", "r+b") as bk_rom:
             mm_bk_rom = mmap(bk_rom.fileno(), 0)
             for index in range(address_start + len(setup_content), address_next_start):
                 mm_bk_rom[index] = 0xAA
@@ -252,7 +252,7 @@ class Compressor():
                 mm[index] = 0
     
     def _verify_pointer_header(self, setup_pointer_start, setup_pointer_end):
-        with open(f"{self._file_dir}Randomized_ROM\\Banjo-Kazooie_Randomized_Seed_{self._seed_val}.z64", "r+b") as bk_rom:
+        with open(f"{self._file_dir}Randomized_ROM/Banjo-Kazooie_Randomized_Seed_{self._seed_val}.z64", "r+b") as bk_rom:
             mm_bk_rom = mmap(bk_rom.fileno(), 0)
             for pointer_index in range(setup_pointer_start, setup_pointer_end + 1, 8):
                 address_start = int((leading_zeros(mm_bk_rom[pointer_index], 2) +

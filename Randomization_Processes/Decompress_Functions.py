@@ -78,7 +78,7 @@ class Decompressor():
                     file_pointer = addr.split(",")[0]
                 self._verify_original_header(self._file_bytes, address1)
                 # Write Compressed File
-                with open(f"{self._file_dir}Randomized_ROM\\{file_pointer}-Compressed.bin", "w+b") as comp_file:
+                with open(f"{self._file_dir}Randomized_ROM/{file_pointer}-Compressed.bin", "w+b") as comp_file:
                     # Write Header
                     for hex_val in header:
                         comp_file.write(bytes.fromhex(hex_val))

@@ -400,7 +400,7 @@ class User_GUI_Class():
         self.logger = logging.getLogger("Rotating Log")
         self.logger.setLevel(logging.INFO)
         FORMAT = '[%(levelname)s] %(asctime)-15s - %(funcName)s: %(message)s'
-        handler = RotatingFileHandler(f"{self.cwd}\Randomizer_Log_File.log", maxBytes=(512*1024), backupCount=1)
+        handler = RotatingFileHandler(f"{self.cwd}/Randomizer_Log_File.log", maxBytes=(512*1024), backupCount=1)
         self.logger.addHandler(handler)
         logging.basicConfig(format=FORMAT)
     

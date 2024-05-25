@@ -1318,7 +1318,7 @@ class World_Manipulation_Class():
         # Find location of world puzzles
         # 00 00 01 01 00 5D 02 02 00 5E 05 03 00 60 07 03 00 63 08 04 00 66 09 04 00 6A 0A 04 00 6E 0C 04 00 72 0F 04 00 76 19 05 00 7A 04 03
         # Every 4 is a note door, with the third value being the one you have to change
-        with open(f"{self._file_dir}Randomized_ROM\\FCF698-Decompressed.bin", "r+b") as decomp_file:
+        with open(f"{self._file_dir}Randomized_ROM/FCF698-Decompressed.bin", "r+b") as decomp_file:
             mm_decomp = mmap.mmap(decomp_file.fileno(), 0)
             #                                                      0 1 2 3 4 5 6 7 8 910111213141516171819202122232425262728293031323334353637383940414243
             note_door_index_start = mm_decomp.find(bytes.fromhex("00000101005D0202005E0503006007030063080400660904006A0A04006E0C0400720F0400761905007A0403"))
