@@ -452,7 +452,7 @@ class User_GUI_Class():
     def _select_rom_file(self):
         '''Opens a browser to select the ROM file ending in .z64'''
         self.logger.info("Selecting ROM file")
-        filename = tkinter.filedialog.askopenfilename(initialdir=self.cwd, title="Select The BK ROM File", filetype =(("Rom Files","*.z64"),("all files","*.*")) )
+        filename = tkinter.filedialog.askopenfilename(initialdir=self.cwd, title="Select The BK ROM File", filetypes =(("Rom Files","*.z64"),("all files","*.*")) )
         if(not filename):
             return
         self.rom_file_entry.set(filename)
