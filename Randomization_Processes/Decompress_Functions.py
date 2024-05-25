@@ -28,6 +28,7 @@ Created on Aug 24, 2021
 ######################
 
 import subprocess
+import os
 
 ####################
 ### FILE IMPORTS ###
@@ -57,7 +58,10 @@ class Decompressor():
     
     def _decompress_file(self, compressed_file):
         """Decompresses the hex file that was extracted from the main ROM file"""
-        cmd = f"\"{self._file_dir}GZIP.EXE\" -dc \"{self._file_dir}Randomized_ROM/{compressed_file.upper()}-Compressed.bin\" > \"{self._file_dir}Randomized_ROM/{compressed_file.upper()}-Decompressed.bin\""
+        if os.name == 'nt':
+            cmd = f"\"{self._file_dir}GZIP.EXE\" -dc \"{self._file_dir}Randomized_ROM/{compressed_file.upper()}-Compressed.bin\" > \"{self._file_dir}Randomized_ROM/{compressed_file.upper()}-Decompressed.bin\""
+        else:
+            cmd = f"gzip -dc \"{self._file_dir}Randomized_ROM/{compressed_file.upper()}-Compressed.bin\" > \"{self._file_dir}Randomized_ROM/{compressed_file.upper()}-Decompressed.bin\""
         subprocess.Popen(cmd, universal_newlines=True, shell=True).communicate()
     
     def _decompressor(self, id_dict, address_type="Pointer"):
